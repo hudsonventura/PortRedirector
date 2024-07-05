@@ -22,7 +22,7 @@ public class UdpPortRedirector
     {
         using (var udpClient = new UdpClient(new IPEndPoint(_localIPAddress, _localPort)))
         {
-            Console.WriteLine($"UDP redirector started on {_localIPAddress}:{_localPort}, redirecting to {_remoteIPAddress}:{_remotePort}");
+            //Console.WriteLine($"UDP redirector started on {_localIPAddress}:{_localPort}, redirecting to {_remoteIPAddress}:{_remotePort}");
 
             while (true)
             {

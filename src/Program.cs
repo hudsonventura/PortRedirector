@@ -17,11 +17,21 @@ foreach (var redirect in redirectEntries)
     var localPort = redirect.port;
     var remoteIP = IPAddress.Parse(redirect.destiny.Split(":")[0]);
     var remotePort = int.Parse(redirect.destiny.Split(":")[1]);
+    var type = redirect.type;
+    
+    if(type == portredirector.TypeConection.TCP){
+        var redirector = new portredirector.TcpPortRedirector(localIP, localPort, remoteIP, remotePort);
+        tasks.Add(redirector.StartAsync());
+        Console.WriteLine($"{redirect.title} -> TCP redirector started on {localIP}:{localPort}, redirecting to {remoteIP}:{remotePort}");
+    }
 
-    var redirector = new portredirector.TcpPortRedirector(localIP, localPort, remoteIP, remotePort);
-    tasks.Add(redirector.StartAsync());
+    if(type == portredirector.TypeConection.UDP){
+        var redirector = new portredirector.UdpPortRedirector(localIP, localPort, remoteIP, remotePort);
+        tasks.Add(redirector.StartAsync());
+        Console.WriteLine($"{redirect.title} -> UDP redirector started on {localIP}:{localPort}, redirecting to {remoteIP}:{remotePort}");
+    }
 
-    Console.WriteLine($"{redirect.title} -> TCP redirector started on {localIP}:{localPort}, redirecting to {remoteIP}:{remotePort}");
+    
 }
 
 await Task.WhenAll(tasks);
