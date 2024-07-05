@@ -2,14 +2,14 @@
 
 FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
 WORKDIR /app
-EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["./src/portredirector.csproj", "portredirector/"]
-RUN dotnet restore "portredirector/portredirector.csproj"
+COPY *.csproj .
+RUN dotnet restore
+
 COPY . .
-WORKDIR "/src/portredirector"
+WORKDIR "/src/"
 RUN dotnet build "portredirector.csproj" -c Release -o /app/build
 
 FROM build AS publish

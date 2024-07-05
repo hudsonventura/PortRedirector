@@ -1,4 +1,4 @@
-# RedirectorPort
+# PortRedirector
 
 It's create a way to redirect some ports to diferent destinies and ports. It works like a proxy, but not only HTTP conection, but any other type.    
 
@@ -21,6 +21,23 @@ To put it online, edit the file `appsettigs.json` and add all of your services a
 }
 ```  
   
+
+Don't forget to register the ports to be open on `docker-compose.yml`:
+``` yaml
+services:
+
+  portredirector:
+    #image: ${DOCKER_REGISTRY-}api
+    container_name: portredirector
+    build:
+      context: ./src
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./appsettings.json:/app/appsettings.json"
+    ports:
+      - "12345-12350:12345-12350" # HERE!!!
+``` 
+  
   
 After that, just up the containers:
 ``` bash
@@ -32,5 +49,5 @@ and, go ahead:
 ``` bash
 test 1 -> TCP redirector started on 0.0.0.0:12345, redirecting to 10.10.1.201:22
 test 2 -> TCP redirector started on 0.0.0.0:12344, redirecting to 10.10.1.201:24
-```
+```  
 

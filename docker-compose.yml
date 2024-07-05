@@ -1,12 +1,12 @@
 services:
 
-  meganacas:
+  portredirector:
     #image: ${DOCKER_REGISTRY-}api
     container_name: portredirector
     build:
-      context: ./
-      dockerfile: ./src/Dockerfile
+      context: ./src
+      dockerfile: ./Dockerfile
     volumes:
       - "./appsettings.json:/app/appsettings.json"
     ports:
-      - 12345:12345
+      - "12345-12350:12345-12350"
