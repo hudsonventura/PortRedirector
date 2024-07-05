@@ -9,11 +9,13 @@ To put it online, edit the file `appsettigs.json` and add all of your services a
     "redirects": [
         {
             "title": "test 1",          //it's just a name to show in log
+            "type": "TCP",              //chose TCP or UDP
             "port": 12345,              //it's the port you will conect
             "destiny": "10.10.1.201:22" //it's the url and port (respect the format 'url:port') that your connection is goint to bem redirected
         },
         {
             "title": "test 2",
+            "type": "UDP",
             "port": 12344,
             "destiny": "10.10.1.201:24"
         }
@@ -48,6 +50,6 @@ sudo docker compose up
 and, go ahead:
 ``` bash
 test 1 -> TCP redirector started on 0.0.0.0:12345, redirecting to 10.10.1.201:22
-test 2 -> TCP redirector started on 0.0.0.0:12344, redirecting to 10.10.1.201:24
+test 2 -> UDP redirector started on 0.0.0.0:12344, redirecting to 10.10.1.201:24
 ```  
 
